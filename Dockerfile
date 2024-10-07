@@ -15,7 +15,7 @@ COPY . .
 
 # set environment variables
 #specify the main Flask application file
-ENV FLASK_APP=main.py
+ENV FLASK_APP=src.main.py
 # allow the server to be accessible externally
 ENV FLASK_RUN_HOST=0.0.0.0
 
