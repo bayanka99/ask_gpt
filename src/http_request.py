@@ -5,7 +5,7 @@ url = 'http://localhost:5000/ask'
 
 
 payload = {
-    'question': 'What is the capital of France?'
+    'question': 'what is your name?'
 }
 
 

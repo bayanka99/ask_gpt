@@ -2,7 +2,7 @@ import os
 
 import openai
 from flask import Flask, request, jsonify
-from DAL_Controller import init_db,Insert_QA
+from src.DAL_Controller import init_db,Insert_QA
 
 
 

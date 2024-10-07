@@ -16,7 +16,7 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-from DAL_Controller import database
+from src.DAL_Controller import database
 # target_metadata = mymodel.Base.metadata
 target_metadata = database.metadata
 

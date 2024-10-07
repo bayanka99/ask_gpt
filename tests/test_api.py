@@ -1,7 +1,7 @@
 import json
 import pytest
-from main import app
-from DAL_Controller import database
+from src.main import app
+from src.DAL_Controller import database
 
 TEST_DATABASE_URI = 'postgresql://postgres:admin@localhost:5432/ask_gpt_test'
 
