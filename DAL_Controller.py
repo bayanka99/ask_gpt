@@ -1,10 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 # Initialize the database
 database = SQLAlchemy()
 
 def init_db(app):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@db:5432/ask_gpt'
+    if os.environ.get('FLASK_ENV') == 'testing':
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost:5432/ask_gpt'
     database.init_app(app)
 
 class QA_DTO(database.Model): ##this defines the table and it's columns
