@@ -1,27 +1,14 @@
-# from flask import Flask
-#
-# app = Flask(__name__)
-#
-# @app.route("/")
-# def hello_world():
-#     return "<p>Hello, World!</p>"
 import os
 
 import openai
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from DAL_Controller import database,QA_DTO,init_db,add_qa_dto
+
+
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost/ask_gpt'
 
-
-# Initialize the database
-database = SQLAlchemy(app)
-
-class QA_DTO(database.Model):
-    id = database.Column(database.Integer, primary_key=True)
-    question = database.Column(database.String)
-    answer = database.Column(database.String)
-
+init_db(app) ##initiates the database
 
 
 @app.route('/ask',methods=['POST'])
@@ -29,9 +16,7 @@ def ask():
     data = request.json
     question = data.get('question')
     answer = get_answer_from_openai(question)
-    qa_dto = QA_DTO(question=question, answer=answer)
-    database.session.add(qa_dto)
-    database.session.commit()
+    add_qa_dto(question,answer)
     return jsonify({'question': question, 'answer': answer})
 
 def get_answer_from_openai(question):
@@ -48,3 +33,5 @@ def get_answer_from_openai(question):
     )
 
     return completion.choices[0].message.content
+
+#test=app.test_client().post('/ask', json={'question': 'how are you?'})
