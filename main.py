@@ -2,7 +2,7 @@ import os
 
 import openai
 from flask import Flask, request, jsonify
-from DAL_Controller import database,QA_DTO,init_db,add_qa_dto
+from DAL_Controller import init_db,Insert_QA
 
 
 
@@ -16,7 +16,7 @@ def ask():
     data = request.json
     question = data.get('question')
     answer = get_answer_from_openai(question)
-    add_qa_dto(question,answer)
+    Insert_QA(question,answer)
     return jsonify({'question': question, 'answer': answer})
 
 def get_answer_from_openai(question):
@@ -33,5 +33,3 @@ def get_answer_from_openai(question):
     )
 
     return completion.choices[0].message.content
-
-#test=app.test_client().post('/ask', json={'question': 'how are you?'})

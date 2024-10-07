@@ -1,0 +1,5 @@
+flask
+flask_sqlalchemy
+openai
+psycopg2-binary
+alembic
