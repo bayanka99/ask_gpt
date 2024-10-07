@@ -15,6 +15,8 @@ init_db(app) ##initiates the database
 def ask():
     data = request.json
     question = data.get('question')
+    if question is None or question=="":
+        return jsonify({'error': 'No question provided'}),400
     answer = get_answer_from_openai(question)
     Insert_QA(question,answer)
     return jsonify({'question': question, 'answer': answer})
